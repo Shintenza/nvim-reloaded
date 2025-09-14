@@ -11,17 +11,17 @@ function keymap(mode, keys, action, description)
   vim.keymap.set(mode, keys, action, binding_options)
 end
 
-keymap("n", "<leader>[", "<cmd>BufferLineCyclePrev<CR>", "Next buffer")
-keymap("n", "<leader>]", "<cmd>BufferLineCycleNext<CR>", "Prev buffer")
+keymap("n", "<leader-[>", "<cmd>BufferLineCyclePrev<CR>", "Next buffer")
+keymap("n", "<leader-]>", "<cmd>BufferLineCycleNext<CR>", "Prev buffer")
 
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", "Toggle file explorer")
 keymap("n", "<leader>z", ":ToggleTerm<CR>", "Toggle terminal")
 
-local builtin = require("telescope.builtin")
-keymap("n", "<leader>ff", builtin.find_files, "Telescope find files")
-keymap("n", "<leader>fg", builtin.live_grep, "Telescope live grep")
-keymap("n", "<leader>fb", builtin.buffers, "Telescope buffers")
-keymap("n", "<leader>fh", builtin.help_tags, "Telescope help tags")
+local telescope = require("telescope.builtin")
+keymap("n", "<leader>ff", telescope.find_files, "Telescope find files")
+keymap("n", "<leader>fg", telescope.live_grep, "Telescope live grep")
+keymap("n", "<leader>fb", telescope.buffers, "Telescope buffers")
+keymap("n", "<leader>fh", telescope.help_tags, "Telescope help tags")
 
 keymap("t", "<esc>", [[<C-\><C-n>]])
 
@@ -33,8 +33,6 @@ function M.get_lsp_bindigs(event)
   end
 
   -- Standard lsp mappings
-  bufmap("n", "grr", "<cmd>lua vim.lsp.buf.references()<cr>")
-  bufmap("n", "gri", "<cmd>lua vim.lsp.buf.implementation()<cr>")
   bufmap("n", "gra", "<cmd>lua vim.lsp.buf.code_action()<cr>")
   bufmap("n", "gO", "<cmd>lua vim.lsp.buf.document_symbol()<cr>")
   bufmap({ "i", "s" }, "<C-s>", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
@@ -45,7 +43,10 @@ function M.get_lsp_bindigs(event)
   bufmap({ "n", "x" }, "gq", "<cmd>lua vim.lsp.buf.format({async = true})<cr>")
 
   -- Lspsaga
+  bufmap("n", "grr", "<cmd>Lspsaga finder ref<cr>")
+  bufmap("n", "gri", "<cmd>Lspsaga finder imp<cr>")
   bufmap("n", "grn", "<cmd>Lspsaga rename<cr>")
+  bufmap("n", "gra", "<cmd>Lspsaga code_action<cr>")
   bufmap("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>")
   bufmap("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>")
   bufmap("n", "K", "<cmd>Lspsaga hover_doc<cr>")
