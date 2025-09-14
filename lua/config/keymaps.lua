@@ -1,11 +1,23 @@
 local opts = { noremap = false, silent = true }
-local keymap = vim.api.nvim_set_keymap
 
-local builtin = require('telescope.builtin')
+function keymap(mode, keys, action, description)
+  local binding_options = {}
+  for k, v in pairs(opts) do
+    binding_options[k] = v
+  end
+  if description ~= nil then
+    binding_options["desc"] = description
+  end
+  vim.keymap.set(mode, keys, action, binding_options)
+end
 
-keymap('n', '<C-n>', ':NvimTreeToggle<CR>', opts)
+keymap("n", "<leader>e", ":NvimTreeToggle<CR>", "Toggle file explorer")
+keymap("n", "<leader>z", ":ToggleTerm<CR>", "Toggle terminal")
 
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+local builtin = require("telescope.builtin")
+keymap("n", "<leader>ff", builtin.find_files, "Telescope find files")
+keymap("n", "<leader>fg", builtin.live_grep, "Telescope live grep")
+keymap("n", "<leader>fb", builtin.buffers, "Telescope buffers")
+keymap("n", "<leader>fh", builtin.help_tags, "Telescope help tags")
+
+keymap("t", "<esc>", [[<C-\><C-n>]])

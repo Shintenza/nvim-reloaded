@@ -14,10 +14,5 @@ return {
         root_folder_label = false,
       },
     })
-    local normal_hl = vim.api.nvim_get_hl(0, { name = "NvimTreeNormal" })
-    vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", {
-      fg = normal_hl.bg,
-      bg = normal_hl.bg,
-    })
   end,
 }

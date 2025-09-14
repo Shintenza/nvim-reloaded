@@ -1,17 +1,17 @@
 return {
   {
-    'windwp/nvim-autopairs',
+    "windwp/nvim-autopairs",
     event = "InsertEnter",
-    config = true,
     opts = {
-      check_ts = true
-    }
+      check_ts = true,
+    },
   },
   {
-    'windwp/nvim-ts-autotag',
-    config = true,
+    "windwp/nvim-ts-autotag",
     opts = {
-      enable_close_on_slash = true
-    }
-  }
+      opts = {
+        enable_close_on_slash = true,
+      },
+    },
+  },
 }
